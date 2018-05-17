@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel = "stylesheet" href = "home.css">
+  <title>運命数占い</title>
+</head>
+<script type = "text/javascript">
+function cul() {
+  var sum = 0;
+  var y = myform.year.value;//年
+  var m = myform.month.value;//月
+  var d = myform.day.value;//日
+
+  var yy = myform.year.value;//年チェック用
+  var mm = myform.month.value;//月チェック用
+  var dd = myform.day.value;//日チェック用
+
+  //例外処理
+  var search_result_y = yy.search(/\d{4}/);
+  var search_result_m = yy.search(/\d{1,2}/);
+  var search_result_d = yy.search(/\d{1,2}/);
+  if(search_result_y == -1){
+    window.alert("西暦は4桁です。正確に入力してください。(半角)");
+    return this;
+  }else if(search_result_m == -1) {
+    window.alert("月は1桁か2桁です。正確に入力してください。(半角)");
+    return this;
+  }else if(search_result_d == -1){
+    window.alert("日は1桁か2桁です。正確に入力してください。(半角)");
+    return this;
+  }
+
+  //年
+  var temp = y % 1000;//千の位
+  var i = (y - temp) / 1000;
+  sum += i;
+  y = y - i * 1000;
+
+  temp = y % 100;//百の位
+  i = (y - temp) / 100;
+  sum += i;
+  y = y - i * 100;
+
+  temp = y % 10;//十の位
+  i = (y - temp) / 10;
+  sum += i;
+  y = y - i * 10;
+
+  sum += y;//一の位
+
+  //月
+  temp = m % 10;//十の位
+  i = (m - temp) / 10;
+  sum += i;
+  m = m - i * 10;
+
+  sum += m;//一の位
+
+  //日
+  temp = d % 10;//十の位
+  i = (d - temp) / 10;
+  sum += i;
+  d = d - i * 10;
+
+  sum += d;//一の位
+
+  while(sum >= 10){
+    if((sum ===11) || (sum === 22) || (sum === 33) || (sum == 44)){//ゾロ目の時
+      break;
+    }
+    var su = 0;
+    //運命数_計算
+    temp = sum % 10;//十の位
+    i = (sum - temp) / 10;
+    su += i;
+    sum = sum - i * 10;
+
+    su += sum;//一の位
+    sum = su;
+  }
+  var su = document.getElementById("su");//運命数の表示
+  su.textContent = null;
+  var txt = document.createTextNode(sum);
+  su.appendChild(txt);
+  var txt,txt1,txt2;
+  var result = document.getElementById("result");
+  //su.textContent = null
+  result.textContent = null;
+  var line = document.createElement("br");
+  var line1 = document.createElement("br");
+  switch (sum) {
+    case 1:
+      txt = document.createTextNode("コミュニケーション能力が高い。リーダータイプ。");
+      txt1 = document.createTextNode("もっとも相性がいいのは運命数2と6の人。");
+      txt2 = document.createTextNode("逆に相性が悪いのは運命数1の人。");
+      result.appendChild(txt);
+      result.appendChild(line);
+      result.appendChild(txt1);
+      result.appendChild(line1);
+      result.appendChild(txt2);
+      break;
+    case 2:
+    txt = document.createTextNode("誰からでも信頼されるキャラ。しかし他人から、とやかく言われたくない。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数4と6の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数7の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    case 3:
+    txt = document.createTextNode("面倒見の良い人。誰からでも頼られるタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数1と5と8の人。");
+    txt2 = document.createTextNode("相性が悪い数の人はなく、どの運命数の人とうまくいく傾向がある。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    case 4:
+    txt = document.createTextNode("マイペースで努力家。立派な人で尊敬されるタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数7と9の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数3と5の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    case 5:
+    txt = document.createTextNode("口が達者で人を惹きつける魅力を持つタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数5の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数1と4と9の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    case 6:
+    txt = document.createTextNode("空気を読むことに長けています。人との調和を重んじバランス感覚に優れているタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数2と3と5の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数7の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    case 7:
+    txt = document.createTextNode("頭の回転が早い。論理的に物事を考えるタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数4と9の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数2と6の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    case 8:
+    txt = document.createTextNode("チャレンジ精神が旺盛。最後まで諦めずにやり抜く力を持つタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数2の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数1の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    case 9:
+    txt = document.createTextNode("思いやりが強い。自分の理想を追い求めるタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数2の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数1と5の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    case 11:
+    txt = document.createTextNode("繊細で器用。常に進化を求めるタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数2と11の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数1と22の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    case 22:
+    txt = document.createTextNode("天才肌。カリスマ的な魅力を持ち、多くの人と繋がりを持てるタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数2と6の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数22の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    case 33:
+    txt = document.createTextNode("好奇心が旺盛。誰とでも仲良くすることができ、無償の愛を提供するタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数1と3の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数2と4と8の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+    default:
+    txt = document.createTextNode("全能的存在。精神力が強く重責を乗り越えられるタイプ。");
+    txt1 = document.createTextNode("もっとも相性がいいのは運命数7の人。");
+    txt2 = document.createTextNode("逆に相性が悪いのは運命数2の人。");
+    result.appendChild(txt);
+    result.appendChild(line);
+    result.appendChild(txt1);
+    result.appendChild(line1);
+    result.appendChild(txt2);
+      break;
+  }
+}
+</script>
+<body>
+  <div id = "theme">
+    運命数占い！！
+  </div>
+  <p>
+    <div id = "strong">
+      <strong>運命数</strong>、それはあなたの生まれ持つ運命的な数字</p>
+    </div>
+  <div id = "main">
+    <p>あなたの生年月日を入力してください。<em>(半角)</em></p>
+  </div>
+  <form name = "myform" id = "myform">
+    <input type = "text"  name = "year">年(西暦)<br>
+    <input type = "text"  name = "month">月(01~12)<br>
+    <input type = "text"  name = "day">日(01~31)<br>
+    <input type = "button" value="計算開始" onclick="cul()">
+  </form>
+  <div id = "re">
+    <p>↓運命数占いの結果</p>
+  </div>
+  <hr>
+  <p>あなたの運命数は
+    <div id = "su">
+    </div>
+  </p>
+  <div id = "result">
+  </div>
+</body>
+</html>
